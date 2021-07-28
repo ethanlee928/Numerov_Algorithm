@@ -3,7 +3,7 @@
 import math
 
 class Numerov_algorithm:
-    def __init__(self, x_old, y_old, y_prime_init, step_size):
+    def __init__(self, x_old, y_old, y_prime_init, step_size, x_stop):
         self.x_old = x_old
         self.x_current = x_old + step_size
         self.x_new = x_old + step_size * 2
@@ -12,6 +12,7 @@ class Numerov_algorithm:
         self.y_new = None
         self.y_prime_init = y_prime_init
         self.step_size = step_size
+        self.x_stop = x_stop
 
     def S(self, x):
         return 0
@@ -40,19 +41,19 @@ class Numerov_algorithm:
         self.y_current = self.y_new
         self.x_old = self.x_current
         self.x_current = self.x_new
-        self.x_new += h
+        self.x_new += self.step_size
 
+    def solve_equation(self):
+        self.initialize_3_diff()
+        with open("results.txt", "w") as f:
+            f.write(f'x\ty\n')
+            while self.x_new < self.x_stop:
+                self.three_diff_formula()
+                # print(self.x_current)
+                f.write(f'{self.x_current}\t{self.y_current}\n')
 
-    
 
 if __name__ == "__main__":
-    function1 = Numerov_algorithm(0, 1, 0, 0.01)
-    function1.initialize_3_diff()
-    print(function1.x_current)
-    with open("results.txt", "w") as f:
-        f.write(f'x\ty\n')
-        while function1.x_new < 5:
-            function1.three_diff_formula()
-            print(function1.y_current)
-            f.write(f'{function1.x_current}\t{function1.y_current}\n')
+    function1 = Numerov_algorithm(0, 1, 0, 0.01, 6)
+    function1.solve_equation()
         
