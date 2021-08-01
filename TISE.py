@@ -2,7 +2,6 @@
 ## - (h_bar / (2m))^2 * phi'' + V(x) * phi = E * phi
 ## uses shooting method to find the eigenvalue
 
-import math
 import time
 from Numerov_algorithm import Numerov_algorithm
 
@@ -38,17 +37,19 @@ class TISE(Numerov_algorithm):
 
 
 if __name__ == "__main__":
-    
-    eigen_value = 5
+    start_time = time.time()
+    eigen_value = 2
     try_again_step_size = 0.005
     try_again = True
     
     while try_again:
         eigen_value += try_again_step_size
-        tise = TISE(0, 0, 1, 0.001, 1, eigen_value=eigen_value, threshold=1e-3)  
+        tise = TISE(0, 0, 1, 0.0001, 1, eigen_value=eigen_value, threshold=1e-3)  
         tise.solve_equation()
         try_again = tise.check_BC()
         # print(tise.y_current, eigen_value)
+    
+    end_time = time.time()
     ## checking
     print(f'wave function value at BC = {tise.y_current}\neigenvalue = {eigen_value}')
-    
+    print(f'time used: {end_time - start_time}s')

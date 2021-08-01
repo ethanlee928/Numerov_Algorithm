@@ -1,3 +1,4 @@
 *.txt
 .git_token
 RK4.py
+__pycache__/
