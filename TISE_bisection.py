@@ -3,7 +3,7 @@
 ## uses shooting method to find the eigenvalue
 
 import time
-from threading import Thread, ThreadError
+from threading import Thread
 from Numerov_algorithm import Numerov_algorithm
 
 def bisection(lower_bound, upper_bound, mid_value, E_lower, E_upper, E_mid):

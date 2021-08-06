@@ -45,14 +45,14 @@ class Numerov_algorithm:
 
     def solve_equation(self):
         self.initialize_3_diff()
-        # with open("results.txt", "w") as f:
-        #     f.write(f'x\tphi\n')
-        #     f.write(f'{self.x_old}\t{self.y_old}\n')
-        #     f.write(f'{self.x_current}\t{self.y_current}\n')        
-        while self.x_new <= self.x_stop:
-            self.three_diff_formula()
+        with open("results.txt", "w") as f:
+            f.write(f'r\tphi\n')
+            f.write(f'{self.x_old}\t{self.y_old}\n')
+            f.write(f'{self.x_current}\t{self.y_current}\n')        
+            while self.x_new <= self.x_stop:
+                self.three_diff_formula()
                 # print(self.y_current)
-                # f.write(f'{self.x_current}\t{self.y_current}\n')
+                f.write(f'{self.x_current}\t{self.y_current}\n')
 
 
 if __name__ == "__main__":
